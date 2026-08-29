@@ -14,6 +14,11 @@ if (surface && action && score && stateText) {
     score!.textContent = `${state.score} / ${TARGET_SCORE}`;
     stateText!.textContent =
       state.phase === "won" ? "YOU WIN" : state.phase === "lost" ? "TOO EARLY" : state.phase === "green" ? "GREEN — GO" : "RED — WAIT";
+    // Playtest: after losing, it wasn't obvious the button restarts the
+    // round. The button already doubles as restart (see act() below); this
+    // just says so once the round is actually over.
+    action!.textContent = state.phase === "lost" ? "RESTART" : "";
+    action!.setAttribute("aria-label", state.phase === "lost" ? "Restart" : "Reaction Rush");
   }
 
   function scheduleFlip(): void {
