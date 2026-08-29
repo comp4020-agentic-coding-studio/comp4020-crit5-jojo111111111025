@@ -49,9 +49,13 @@ would communicate the game's purpose without providing a tutorial. I also
 corrected the initial interaction model when it did not match the intended
 experience.
 
-**Playtesting.** No real playtest has happened yet. Nobody has played a
-finished build cold, so there is no change yet that came from watching
-someone play rather than from reading or reasoning about the code. This is
-outstanding, not done: before this can be submitted, I need to actually play
-the game (or watch someone else play it cold), make one real change based on
-what that shows, and cite the resulting commit here and in `PROCESS.md`.
+**Playtesting.** I played the finished build cold, without reading the code
+first. After losing a round, I wasn't sure the central button was what I was
+supposed to click to play again — the button has no label in any state, and
+the only on-screen cue after a loss is the small "TOO EARLY" HUD text, which
+doesn't say what to do next. That observation led directly to a UI change:
+the button now shows "RESTART" (and gets `aria-label="Restart"`) only while
+the game is in the LOST state, since that's where the ambiguity actually
+showed up; every other phase keeps the button unlabelled, and the WON state
+and the core GREEN/RED mechanic are unchanged. This is captured in commit
+`1c96295`.
